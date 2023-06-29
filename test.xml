@@ -1,0 +1,18 @@
+<Resposta DataCriacao="20/12/2022 00:01:10">
+  <Categorias>
+    <Categoria IdCategoria="13" IdDepartamento="13" Level="1" Nome="Eletrodomésticos">
+      <Categoria IdCategoria="362" IdCategoriaPai="13" IdDepartamento="13" Level="2" Nome="Acessórios" />
+      <Categoria IdCategoria="16" IdCategoriaPai="13" IdDepartamento="13" Level="2" Nome="Adega de Vinhos" />
+      <Categoria IdCategoria="2878" IdCategoriaPai="13" IdDepartamento="13" Level="2" Nome="Centrífuga de Roupas" />
+      <Categoria IdCategoria="23" IdCategoriaPai="13" IdDepartamento="13" Level="2" Nome="Coifas" />
+      <Categoria IdCategoria="159" IdCategoriaPai="13" IdDepartamento="13" Level="2" Nome="Cooktop">
+        <Categoria IdCategoria="3199" IdCategoriaPai="159" IdDepartamento="13" Level="3" Nome="1 Boca" />
+        <Categoria IdCategoria="3200" IdCategoriaPai="159" IdDepartamento="13" Level="3" Nome="3 Bocas" />
+        <Categoria IdCategoria="3190" IdCategoriaPai="159" IdDepartamento="13" Level="3" Nome="4 Bocas" />
+        <Categoria IdCategoria="3191" IdCategoriaPai="159" IdDepartamento="13" Level="3" Nome="5 Bocas" />
+        <Categoria IdCategoria="3189" IdCategoriaPai="159" IdDepartamento="13" Level="3" Nome="Dominó (2 Bocas)" />
+        <Categoria IdCategoria="2156" IdCategoriaPai="159" IdDepartamento="13" Level="3" Nome="Rangetop" />
+      </Categoria>
+    </Categoria>
+  </Categorias>
+</Resposta>

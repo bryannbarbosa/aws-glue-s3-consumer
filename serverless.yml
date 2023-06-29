@@ -17,7 +17,20 @@ provider:
       Action:
         - glue:CreateTrigger
         - glue:CreateJob
+        - glue:StartJobRun
       Resource: "*"
+
+functions:
+  trigger:
+    handler: handler.trigger
+    events:
+      - s3:
+          bucket: easyb2b-iga
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: upload/via-varejo-imports
+            - suffix: .xml
+          existing: true
 
 custom:
   pythonRequirements:
@@ -36,19 +49,10 @@ Glue:
     LocationConstraint: us-east-2
   jobs:
     - name: serverless-glue-import-job
-      scriptPath: handler.py
+      scriptPath: glue.py
       Description: Glue Import Job
       tempDir: false
       type: spark
-      glueVersion: python3-2.0
+      glueVersion: python3-4.0
       role: arn:aws:iam::723297943207:role/GlueAccess
-      MaxCapacity: 1
-  triggers:
-    - name: s3-object-trigger
-      type: s3
-      actions:
-        - name: serverless-glue-import-action
-          bucketName: easyb2b-iga
-          objectPrefix: /upload/via-varejo-imports/
-          event:
-            - s3:ObjectCreated:*
+      MaxCapacity: 2
