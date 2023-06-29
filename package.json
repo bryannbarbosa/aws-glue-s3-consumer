@@ -4,7 +4,7 @@
     "serverless-python-requirements": "^6.0.0"
   },
   "scripts": {
-    "deploy:dev": "serverless deploy --stage dev",
-    "remove": "serverless remove"
+    "deploy:dev": "serverless deploy --stage development",
+    "remove:dev": "serverless remove --stage development"
   }
 }

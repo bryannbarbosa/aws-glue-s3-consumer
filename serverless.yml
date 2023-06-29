@@ -13,13 +13,15 @@ provider:
         - s3:PutObjectAcl
       Resource:
         - arn:aws:s3:::easyb2b-iga/*
-
-functions:
-  hello:
-    handler: handler.hello
+    - Effect: Allow
+      Action:
+        - glue:CreateTrigger
+        - glue:CreateJob
+      Resource: "*"
 
 custom:
   pythonRequirements:
+    pythonBin: python3
     zip: true
 
 plugins:
@@ -36,9 +38,9 @@ Glue:
     - name: serverless-glue-import-job
       scriptPath: handler.py
       Description: Glue Import Job
-      tempDir: true
+      tempDir: false
       type: spark
-      glueVersion: python3.9-3.0
+      glueVersion: python3-2.0
       role: arn:aws:iam::723297943207:role/GlueAccess
       MaxCapacity: 1
   triggers:

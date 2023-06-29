@@ -6,6 +6,7 @@ develop-eggs/
 node_modules/
 .vscode/
 unzip_requirements.py
+.requirements.zip
 dist/
 downloads/
 eggs/
