@@ -1,0 +1,52 @@
+service: serverless-glue-import-job
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource:
+        - arn:aws:s3:::easyb2b-iga/*
+
+functions:
+  hello:
+    handler: handler.hello
+
+custom:
+  pythonRequirements:
+    zip: true
+
+plugins:
+  - serverless-python-requirements
+  - serverless-glue
+
+Glue:
+  bucketDeploy: serverless-glue-import-job-bucket
+  createBucket: true
+  createBucketConfig:
+    ACL: private
+    LocationConstraint: us-east-2
+  jobs:
+    - name: serverless-glue-import-job
+      scriptPath: handler.py
+      Description: Glue Import Job
+      tempDir: true
+      type: spark
+      glueVersion: python3.9-3.0
+      role: arn:aws:iam::723297943207:role/GlueAccess
+      MaxCapacity: 1
+  triggers:
+    - name: s3-object-trigger
+      type: s3
+      actions:
+        - name: serverless-glue-import-action
+          bucketName: easyb2b-iga
+          objectPrefix: /upload/via-varejo-imports/
+          event:
+            - s3:ObjectCreated:*

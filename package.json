@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "serverless-glue": "^2.12.1",
+    "serverless-python-requirements": "^6.0.0"
+  },
+  "scripts": {
+    "deploy:dev": "serverless deploy --stage dev",
+    "remove": "serverless remove"
+  }
+}
