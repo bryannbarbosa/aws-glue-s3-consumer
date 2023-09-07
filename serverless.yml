@@ -1,4 +1,4 @@
-service: serverless-glue-import-job
+service: serverless-glue-job
 frameworkVersion: '3'
 
 provider:
@@ -12,7 +12,7 @@ provider:
         - s3:PutObject
         - s3:PutObjectAcl
       Resource:
-        - arn:aws:s3:::easyb2b-iga/*
+        - arn:aws:s3:::glue-bucket/*
     - Effect: Allow
       Action:
         - glue:CreateTrigger
@@ -25,10 +25,10 @@ functions:
     handler: handler.trigger
     events:
       - s3:
-          bucket: easyb2b-iga
+          bucket: glue-bucket
           event: s3:ObjectCreated:*
           rules:
-            - prefix: upload/via-varejo-imports
+            - prefix: uploads/files
             - suffix: .xml
           existing: true
 
@@ -42,17 +42,17 @@ plugins:
   - serverless-glue
 
 Glue:
-  bucketDeploy: serverless-glue-import-job-bucket
+  bucketDeploy: serverless-glue-job-bucket-deploy
   createBucket: true
   createBucketConfig:
     ACL: private
     LocationConstraint: us-east-2
   jobs:
-    - name: serverless-glue-import-job
+    - name: serverless-glue-job
       scriptPath: glue.py
-      Description: Glue Import Job
+      Description: Glue Job
       tempDir: false
       type: spark
       glueVersion: python3-4.0
-      role: arn:aws:iam::723297943207:role/GlueAccess
+      role: arn:aws:iam::AWS_USER_ID:role/GlueAccess
       MaxCapacity: 2

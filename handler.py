@@ -5,7 +5,7 @@ def trigger(event, context):
     for s3_event in event['Records']:
         glue_client = boto3.client('glue')
         glue_client.start_job_run(
-            JobName='serverless-glue-import-job',
+            JobName='serverless-glue-job',
             Arguments={
                 '--s3_trigger_event': json.dumps(s3_event)
             }

@@ -15,13 +15,12 @@ def get_s3_object_source_path():
     return s3_file_location
 
 def get_s3_object_destination_path():
-    output_filename = "custom_output_file.json"  # Set the desired custom file name
+    output_filename = "custom_output_file.json"
     return get_s3_object_source_path() + "/" + output_filename
 
 def main():
     sc = SparkContext()
     glueContext = GlueContext(sc)
-    spark = glueContext.spark_session
 
     dynamicFrame = glueContext.create_dynamic_frame.from_options(
       format_options={"rowTag": "Categorias"},
